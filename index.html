@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble POP - Next Gaming</title>
+    <title>Bubble POP - Next Gaming Coin</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #feca57 100%);
@@ -262,7 +262,6 @@
         .bubble {
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.9), rgba(147, 51, 234, 0.7));
             border-radius: 50%;
             cursor: pointer;
             transition: all var(--animation-speed) ease;
@@ -369,16 +368,14 @@
 
         .floating-score {
             position: absolute;
-            color: var(--accent-gold);
             font-weight: 900;
             font-size: 1.6em;
             pointer-events: none;
             z-index: 100;
-            text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 215, 0, 0.6),
-                0 0 30px rgba(255, 215, 0, 0.4);
             animation: floatUp 1.2s ease-out forwards;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         @keyframes floatUp {
@@ -426,8 +423,20 @@
             transform: translateY(-1px);
         }
 
-        .middle-right-image, .left-middle-image {
+        /* Left side container */
+        .left-container {
             position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 50;
+        }
+
+        .left-middle-image {
             width: 120px;
             height: 120px;
             border-radius: 20px;
@@ -439,19 +448,49 @@
             padding: 8px;
         }
 
+        .left-middle-image:hover {
+            transform: scale(1.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .sol-instructions {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9em;
+            text-align: center;
+            max-width: 200px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            line-height: 1.4;
+        }
+
+        .sol-instructions .highlight {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
         .middle-right-image {
+            position: fixed;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--glass-border);
+            transition: all var(--animation-speed) ease;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 8px;
+            z-index: 50;
         }
 
-        .left-middle-image {
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .middle-right-image:hover, .left-middle-image:hover {
+        .middle-right-image:hover {
             transform: translateY(-50%) scale(1.08);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
@@ -587,17 +626,26 @@
                 max-width: 90%;
             }
             
-            .middle-right-image, .left-middle-image {
+            .left-container {
+                left: 10px;
+                gap: 10px;
+            }
+            
+            .left-middle-image {
                 width: 80px;
                 height: 80px;
             }
             
-            .middle-right-image {
-                right: 10px;
+            .sol-instructions {
+                font-size: 0.75em;
+                padding: 10px;
+                max-width: 150px;
             }
             
-            .left-middle-image {
-                left: 10px;
+            .middle-right-image {
+                width: 80px;
+                height: 80px;
+                right: 10px;
             }
             
             .buy-button {
@@ -612,7 +660,7 @@
 <body>
     <div class="header">
         <h1>🫧 Bubble POP 🫧</h1>
-        <div class="tagline">Next Gaming - POP, DROP & EARN!</div>
+        <div class="tagline">Next Gaming Coin - POP, DROP & EARN!</div>
         <div class="dex-info">🔥 System Live! Buy $BPOP on pump.fun DEX 🔥</div>
         <div class="stats">
             <div class="stat-item">
@@ -639,7 +687,14 @@
     
     <div class="combo-indicator" id="comboIndicator"></div>
     
-    <img src="https://iili.io/FQhWvfe.th.png" alt="Bubble POP Meme Coin" class="left-middle-image">
+    <!-- Left side container with image and text -->
+    <div class="left-container">
+        <img src="https://iili.io/FQXFiXa.md.png" alt="Bubble POP Meme Coin" class="left-middle-image">
+        <div class="sol-instructions">
+            send <span class="highlight">0.01 SOL</span> POP 500 Bubble<br>
+            send <span class="highlight">0.05 SOL</span> POP 5000 Bubble
+        </div>
+    </div>
     
     <a href="https://pump.fun" target="_blank" class="buy-button">
         🚀 Buy $BPOP
@@ -709,6 +764,91 @@
                 };
             }
 
+            // Generate random color for bubbles
+            getRandomBubbleColor() {
+                const colors = [
+                    // Rainbow colors
+                    ['#FF6B6B', '#FF8E53'],
+                    ['#4ECDC4', '#44A08D'],
+                    ['#45B7D1', '#96C93D'],
+                    ['#F093FB', '#F5576C'],
+                    ['#4FACFE', '#00F2FE'],
+                    ['#43E97B', '#38F9D7'],
+                    ['#FA709A', '#FEE140'],
+                    ['#30CFD0', '#330867'],
+                    ['#A8EDEA', '#FED6E3'],
+                    ['#FF9A9E', '#FAD0C4'],
+                    ['#FBC2EB', '#A6C1EE'],
+                    ['#FD6F96', '#FECFEF'],
+                    ['#E0C3FC', '#8EC5FC'],
+                    ['#FCCF31', '#F55555'],
+                    ['#5EE7DF', '#66A6FF'],
+                    ['#FFD89B', '#19547B'],
+                    ['#C471F5', '#FA71CD'],
+                    ['#FF6A88', '#FF99AC'],
+                    ['#F8B500', '#FFE066'],
+                    ['#00C9FF', '#92FE9D'],
+                    ['#FC466B', '#3F5EFB'],
+                    ['#FF512F', '#DD2476'],
+                    ['#12C2E9', '#C471ED'],
+                    ['#FDBB2D', '#22C1C3'],
+                    ['#FF0080', '#7928CA'],
+                    ['#FF416C', '#FF4B2B'],
+                    ['#8E2DE2', '#4A00E0'],
+                    ['#FF8008', '#FFC837'],
+                    ['#00B4DB', '#0083B0'],
+                    ['#F77062', '#FE5196'],
+                    ['#56CCF2', '#2F80ED'],
+                    ['#F2994A', '#F2C94C'],
+                    ['#11998E', '#38EF7D'],
+                    ['#FC4A1A', '#F7B733'],
+                    ['#EB3349', '#F45C43'],
+                    ['#5614B0', '#DBD65C'],
+                    ['#009FFF', '#EC2F4B'],
+                    ['#FF7E5F', '#FEB47B'],
+                    ['#654EA3', '#EAFCF9'],
+                    ['#667EEA', '#764BA2'],
+                    ['#F093FB', '#F5576C'],
+                    ['#4FACFE', '#00F2FE'],
+                    ['#43E97B', '#38F9D7'],
+                    ['#FA709A', '#FEE140'],
+                    ['#30CFD0', '#330867'],
+                    ['#A8EDEA', '#FED6E3'],
+                    ['#FF9A9E', '#FAD0C4'],
+                    ['#FBC2EB', '#A6C1EE'],
+                    ['#FD6F96', '#FECFEF'],
+                    ['#E0C3FC', '#8EC5FC'],
+                    ['#FCCF31', '#F55555'],
+                    ['#5EE7DF', '#66A6FF'],
+                    ['#FFD89B', '#19547B'],
+                    ['#C471F5', '#FA71CD'],
+                    ['#FF6A88', '#FF99AC'],
+                    ['#F8B500', '#FFE066'],
+                    ['#00C9FF', '#92FE9D'],
+                    ['#FC466B', '#3F5EFB'],
+                    ['#FF512F', '#DD2476'],
+                    ['#12C2E9', '#C471ED'],
+                    ['#FDBB2D', '#22C1C3'],
+                    ['#FF0080', '#7928CA'],
+                    ['#FF416C', '#FF4B2B'],
+                    ['#8E2DE2', '#4A00E0'],
+                    ['#FF8008', '#FFC837'],
+                    ['#00B4DB', '#0083B0'],
+                    ['#F77062', '#FE5196'],
+                    ['#56CCF2', '#2F80ED'],
+                    ['#F2994A', '#F2C94C'],
+                    ['#11998E', '#38EF7D'],
+                    ['#FC4A1A', '#F7B733'],
+                    ['#EB3349', '#F45C43'],
+                    ['#5614B0', '#DBD65C'],
+                    ['#009FFF', '#EC2F4B'],
+                    ['#FF7E5F', '#FEB47B'],
+                    ['#654EA3', '#EAFCF9']
+                ];
+                
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
             createInitialBubbles() {
                 const bubbleCount = window.innerWidth < 768 ? 60 : 120;
                 for (let i = 0; i < bubbleCount; i++) {
@@ -720,6 +860,15 @@
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
                 
+                // Apply random color to bubble
+                const [color1, color2] = this.getRandomBubbleColor();
+                bubble.style.background = `radial-gradient(circle at 30% 30%, ${color1}, ${color2})`;
+                
+                // Store colors for floating score
+                bubble.dataset.color1 = color1;
+                bubble.dataset.color2 = color2;
+                
+                // Random size variation
                 const sizeChance = Math.random();
                 if (sizeChance < 0.2) {
                     bubble.classList.add('small');
@@ -799,6 +948,19 @@
                 const scoreElement = document.createElement('div');
                 scoreElement.className = 'floating-score';
                 scoreElement.textContent = '$BPOP';
+                
+                // Get colors from the popped bubble
+                const color1 = bubble.dataset.color1;
+                const color2 = bubble.dataset.color2;
+                
+                // Apply the same gradient colors as the bubble
+                scoreElement.style.background = `linear-gradient(45deg, ${color1}, ${color2})`;
+                scoreElement.style.webkitBackgroundClip = 'text';
+                scoreElement.style.webkitTextFillColor = 'transparent';
+                scoreElement.style.backgroundClip = 'text';
+                
+                // Add a subtle glow effect
+                scoreElement.style.filter = `drop-shadow(0 0 8px ${color1})`;
                 
                 const rect = bubble.getBoundingClientRect();
                 scoreElement.style.left = (rect.left + rect.width / 2) + 'px';
