@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble POP - Next Gaming Coin</title>
+    <title>Bubble POP - Solana Meme Coin</title>
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #feca57 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
+            --bg-color: #87CEEB;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-primary: #1a365d;
+            --text-secondary: #2c5282;
             --accent-gold: #FFD700;
-            --accent-purple: #9333ea;
-            --shadow-color: rgba(0, 0, 0, 0.3);
+            --accent-blue: #3182ce;
+            --shadow-color: rgba(0, 0, 0, 0.1);
             --animation-speed: 0.3s;
+            --card-bg: rgba(255, 255, 255, 0.3);
+            --card-border: rgba(255, 255, 255, 0.4);
         }
 
         * {
@@ -24,10 +26,8 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--primary-gradient);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -35,272 +35,214 @@
             flex-direction: column;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* PC Header Styles */
-        .header {
-            text-align: center;
-            padding: 20px 15px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 8px 32px var(--shadow-color);
-        }
-
-        .header h1 {
-            color: var(--text-primary);
-            font-size: 2.2em;
-            margin-bottom: 8px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(45deg, var(--accent-gold), var(--text-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        .header .tagline {
-            color: var(--text-secondary);
-            font-size: 1em;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .header .dex-info {
-            background: linear-gradient(45deg, #14f195, #9945ff);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            font-weight: 700;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 20px rgba(20, 241, 149, 0.3);
-            animation: pulse 2s ease-in-out infinite;
-            font-size: 0.9em;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .stat-item {
+        /* Mobile App Style Header */
+        .app-header {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 15px;
-            color: var(--text-primary);
-            font-weight: 700;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px var(--shadow-color);
-            transition: all var(--animation-speed) ease;
-            font-size: 0.9em;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px var(--shadow-color);
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, var(--accent-purple), #ec4899);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.9em;
-            transition: all var(--animation-speed) ease;
-            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
+            border-bottom: 1px solid var(--glass-border);
+            padding: 16px;
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .app-header-content {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .app-header h1 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4px;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-header .tagline {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .dex-badge {
+            background: linear-gradient(45deg, #14f195, #3182ce);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.75rem;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.2);
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+            text-align: center;
+            margin-top: 8px;
         }
 
-        .btn:hover::before {
-            left: 100%;
+        /* Stats Cards */
+        .stats-container {
+            position: fixed;
+            top: 120px;
+            left: 0;
+            right: 0;
+            z-index: 900;
+            padding: 0 16px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(147, 51, 234, 0.4);
+        .stats-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
-        .btn:active {
+        .stats-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 12px 16px;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            flex-shrink: 0;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Controls Toolbar */
+        .controls-toolbar {
+            position: fixed;
+            top: 180px;
+            left: 0;
+            right: 0;
+            z-index: 800;
+            padding: 0 16px;
+        }
+
+        .controls-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .controls-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .control-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all var(--animation-speed) ease;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .control-btn:hover {
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
-        .btn.secondary {
+        .control-btn.primary {
+            background: linear-gradient(45deg, var(--accent-blue), #63b3ed);
+            border: none;
+            color: white;
+        }
+
+        .control-btn.secondary {
             background: linear-gradient(45deg, #f59e0b, #ef4444);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+            border: none;
+            color: white;
         }
 
-        .btn.secondary:hover {
-            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.4);
-        }
-
-        /* Mobile Header Styles */
-        @media (max-width: 768px) {
-            .header {
-                padding: 15px 10px;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-                margin-bottom: 6px;
-            }
-
-            .header .tagline {
-                font-size: 0.85em;
-                margin-bottom: 8px;
-                line-height: 1.2;
-            }
-
-            .header .dex-info {
-                padding: 6px 15px;
-                border-radius: 20px;
-                margin-bottom: 10px;
-                font-size: 0.8em;
-            }
-
-            .stats {
-                gap: 8px;
-                margin-bottom: 10px;
-            }
-
-            .stat-item {
-                padding: 8px 15px;
-                border-radius: 12px;
-                font-size: 0.8em;
-                min-width: 80px;
-            }
-
-            .controls {
-                gap: 8px;
-            }
-
-            .btn {
-                padding: 8px 15px;
-                border-radius: 15px;
-                font-size: 0.8em;
-            }
-        }
-
-        /* Tablet Header Styles */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .header .tagline {
-                font-size: 0.95em;
-            }
-
-            .header .dex-info {
-                font-size: 0.85em;
-            }
-
-            .stat-item {
-                font-size: 0.85em;
-            }
-
-            .btn {
-                font-size: 0.85em;
-            }
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding-top: 240px;
+            padding-bottom: 100px;
         }
 
         .bubble-container {
-            padding: 30px 15px;
+            padding: 16px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-            gap: 10px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 8px;
+            max-width: 100%;
             margin: 0 auto;
-            flex: 1;
         }
 
+        /* Bubble Styles */
         .bubble {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: all var(--animation-speed) ease;
             position: relative;
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.2),
-                inset 0 2px 5px rgba(255, 255, 255, 0.5),
-                inset 0 -2px 5px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: bubbleFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes bubbleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(2deg); }
-            75% { transform: translateY(10px) rotate(-2deg); }
+                0 4px 12px rgba(0, 0, 0, 0.15),
+                inset 0 2px 5px rgba(255, 255, 255, 0.7),
+                inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .bubble::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 15px;
-            width: 15px;
-            height: 15px;
+            top: 8px;
+            left: 12px;
+            width: 12px;
+            height: 12px;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent);
             border-radius: 50%;
         }
 
         .bubble:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 
-                0 12px 35px rgba(0, 0, 0, 0.3),
-                inset 0 2px 5px rgba(255, 255, 255, 0.7),
-                inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+                0 6px 15px rgba(0, 0, 0, 0.2),
+                inset 0 2px 5px rgba(255, 255, 255, 0.8),
+                inset 0 -2px 5px rgba(0, 0, 0, 0.15);
         }
 
         .bubble.popping {
-            animation: popAnimation 0.4s ease-out forwards;
+            animation: popAnimation 0.3s ease-out forwards;
         }
 
         @keyframes popAnimation {
@@ -309,7 +251,7 @@
                 opacity: 1;
             }
             50% {
-                transform: scale(1.3);
+                transform: scale(1.2);
                 opacity: 0.8;
             }
             100% {
@@ -319,15 +261,110 @@
         }
 
         .bubble.small {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
         }
 
         .bubble.large {
-            width: 75px;
-            height: 75px;
+            width: 60px;
+            height: 60px;
         }
 
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-gold), #ff6b6b);
+            border: none;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--animation-speed) ease;
+            z-index: 1000;
+            text-decoration: none;
+            color: #000;
+            font-size: 1.5rem;
+        }
+
+        .fab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .fab:active {
+            transform: translateY(0);
+        }
+
+        /* Bottom Bar */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            padding: 16px;
+            z-index: 900;
+            box-shadow: 0 -2px 10px var(--shadow-color);
+        }
+
+        .bottom-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .sol-info {
+            flex: 1;
+        }
+
+        .sol-text {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .sol-text .highlight {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .qr-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--animation-speed) ease;
+            flex-shrink: 0;
+        }
+
+        .qr-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .qr-btn img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Combo Indicator */
         .combo-indicator {
             position: fixed;
             top: 50%;
@@ -335,20 +372,19 @@
             transform: translate(-50%, -50%);
             background: linear-gradient(45deg, var(--accent-gold), #ff6b6b);
             color: white;
-            padding: 20px 40px;
-            border-radius: 50px;
-            font-size: 1.8em;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 1.2rem;
             font-weight: 800;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
             pointer-events: none;
             transition: all var(--animation-speed) ease;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .combo-indicator.show {
-            animation: comboShow 1.2s ease-out;
+            animation: comboShow 1s ease-out;
         }
 
         @keyframes comboShow {
@@ -366,13 +402,14 @@
             }
         }
 
+        /* Floating Score */
         .floating-score {
             position: absolute;
             font-weight: 900;
-            font-size: 1.6em;
+            font-size: 1.2rem;
             pointer-events: none;
             z-index: 100;
-            animation: floatUp 1.2s ease-out forwards;
+            animation: floatUp 1s ease-out forwards;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -384,167 +421,25 @@
                 transform: translateY(0) scale(1);
             }
             50% {
-                transform: translateY(-30px) scale(1.2);
+                transform: translateY(-20px) scale(1.1);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-60px) scale(0.8);
+                transform: translateY(-40px) scale(0.8);
             }
         }
 
-        .buy-button {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--accent-gold), #ff6b6b);
-            color: #000;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all var(--animation-speed) ease;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-            z-index: 90;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        .buy-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
-        }
-
-        .buy-button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Left side container */
-        .left-container {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            z-index: 50;
-        }
-
-        .left-middle-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 3px solid var(--glass-border);
-            transition: all var(--animation-speed) ease;
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            padding: 8px;
-        }
-
-        .left-middle-image:hover {
-            transform: scale(1.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .sol-instructions {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 15px;
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 0.9em;
-            text-align: center;
-            max-width: 200px;
-            box-shadow: 0 8px 25px var(--shadow-color);
-            line-height: 1.4;
-        }
-
-        .sol-instructions .highlight {
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
-
-        .middle-right-image {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 3px solid var(--glass-border);
-            transition: all var(--animation-speed) ease;
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            padding: 8px;
-            z-index: 50;
-        }
-
-        .middle-right-image:hover {
-            transform: translateY(-50%) scale(1.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .footer {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            padding: 15px;
-            text-align: center;
-            position: relative;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .qr-popup-btn {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--glass-border);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all var(--animation-speed) ease;
-        }
-
-        .qr-popup-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .qr-popup-btn img {
-            width: 25px;
-            height: 25px;
-            filter: brightness(0) invert(1);
-        }
-
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 3000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.4s ease;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
@@ -554,15 +449,15 @@
 
         .modal-content {
             position: relative;
-            margin: 5% auto;
-            max-width: 80%;
+            margin: 10% auto;
+            max-width: 90%;
             max-height: 80%;
-            animation: slideIn 0.4s ease;
+            animation: slideIn 0.3s ease;
             text-align: center;
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-60px); opacity: 0; }
+            from { transform: translateY(-40px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
@@ -571,23 +466,23 @@
             max-width: 100%;
             height: auto;
             max-height: 80vh;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .modal-text {
             color: var(--text-primary);
-            margin-top: 20px;
-            font-size: 1.3em;
+            margin-top: 16px;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
         .close {
             position: absolute;
-            top: -45px;
+            top: -35px;
             right: 0;
             color: var(--text-primary);
-            font-size: 35px;
+            font-size: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: all var(--animation-speed) ease;
@@ -598,117 +493,158 @@
             transform: scale(1.2);
         }
 
-        /* Mobile adjustments for other elements */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .bubble-container {
-                grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
-                gap: 8px;
-                padding: 15px 10px;
-            }
-            
-            .bubble {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .bubble.small {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .bubble.large {
-                width: 55px;
-                height: 55px;
+            .app-header h1 {
+                font-size: 1.3rem;
             }
 
-            .modal-content {
-                margin: 10% auto;
-                max-width: 90%;
+            .app-header .tagline {
+                font-size: 0.8rem;
             }
-            
-            .left-container {
-                left: 10px;
-                gap: 10px;
+
+            .dex-badge {
+                font-size: 0.7rem;
             }
-            
-            .left-middle-image {
-                width: 80px;
-                height: 80px;
+
+            .stat-card {
+                min-width: 100px;
             }
-            
-            .sol-instructions {
-                font-size: 0.75em;
-                padding: 10px;
-                max-width: 150px;
+
+            .bubble-container {
+                grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+                gap: 6px;
             }
-            
-            .middle-right-image {
-                width: 80px;
-                height: 80px;
-                right: 10px;
+
+            .bubble {
+                width: 40px;
+                height: 40px;
             }
-            
-            .buy-button {
-                bottom: 80px;
-                right: 10px;
-                padding: 12px 20px;
-                font-size: 1em;
+
+            .bubble.small {
+                width: 32px;
+                height: 32px;
+            }
+
+            .bubble.large {
+                width: 48px;
+                height: 48px;
+            }
+
+            .fab {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+            }
+
+            .sol-text {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .stats-container {
+                padding: 0 24px;
+            }
+
+            .controls-toolbar {
+                padding: 0 24px;
+            }
+
+            .bubble-container {
+                padding: 24px;
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
+
+            .bubble {
+                width: 60px;
+                height: 60px;
+            }
+
+            .bubble.small {
+                width: 48px;
+                height: 48px;
+            }
+
+            .bubble.large {
+                width: 72px;
+                height: 72px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🫧 Bubble POP 🫧</h1>
-        <div class="tagline">Next Gaming Coin - POP, DROP & EARN!</div>
-        <div class="dex-info">🔥 System Live! Buy $BPOP on pump.fun DEX 🔥</div>
-        <div class="stats">
-            <div class="stat-item">
-                <span>Bubbles Popped: </span>
-                <span id="score">0</span>
-            </div>
-            <div class="stat-item">
-                <span>Combo: </span>
-                <span id="combo">0</span>
-            </div>
-            <div class="stat-item">
-                <span>Best Combo: </span>
-                <span id="bestCombo">0</span>
-            </div>
-        </div>
-        <div class="controls">
-            <button class="btn" onclick="resetGame()">🔄 Reset</button>
-            <button class="btn secondary" onclick="toggleSound()">🔊 Sound: <span id="soundStatus">ON</span></button>
-            <button class="btn secondary" onclick="addMoreBubbles()">➕ More Bubbles</button>
+    <!-- App Header -->
+    <div class="app-header">
+        <div class="app-header-content">
+            <h1>🫧 Bubble POP</h1>
+            <div class="tagline">Next Gaming Coin - POP, DROP & EARN!</div>
+            <div class="dex-badge">🔥 System Live! Buy $BPOP on pump.fun DEX 🔥</div>
         </div>
     </div>
 
-    <div class="bubble-container" id="bubbleContainer"></div>
-    
+    <!-- Stats Cards -->
+    <div class="stats-container">
+        <div class="stats-scroll">
+            <div class="stat-card">
+                <div class="stat-label">Bubbles Popped</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Combo</div>
+                <div class="stat-value" id="combo">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Best Combo</div>
+                <div class="stat-value" id="bestCombo">0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Toolbar -->
+    <div class="controls-toolbar">
+        <div class="controls-scroll">
+            <button class="control-btn primary" onclick="resetGame()">
+                🔄 Reset
+            </button>
+            <button class="control-btn secondary" onclick="toggleSound()">
+                🔊 Sound: <span id="soundStatus">ON</span>
+            </button>
+            <button class="control-btn secondary" onclick="addMoreBubbles()">
+                ➕ More Bubbles
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="bubble-container" id="bubbleContainer"></div>
+    </div>
+
+    <!-- Combo Indicator -->
     <div class="combo-indicator" id="comboIndicator"></div>
-    
-    <!-- Left side container with image and text -->
-    <div class="left-container">
-        <img src="https://iili.io/FQgoKMu.png" alt="Bubble POP Meme Coin" class="left-middle-image">
-        <div class="sol-instructions">
-            send <span class="highlight">0.01 SOL</span> POP 500 Bubble<br>
-            send <span class="highlight">0.05 SOL</span> POP 5000 Bubble
+
+    <!-- Floating Action Button -->
+    <a href="https://pump.fun" target="_blank" class="fab">
+        🚀
+    </a>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+        <div class="bottom-content">
+            <div class="sol-info">
+                <div class="sol-text">
+                    send <span class="highlight">0.01 SOL</span> POP 500 Bubble<br>
+                    send <span class="highlight">0.05 SOL</span> POP 5000 Bubble
+                </div>
+            </div>
+            <button class="qr-btn" id="qrPopupBtn" title="Scan QR Code">
+                <img src="https://iili.io/FQXFiXa.md.png" alt="QR Code">
+            </button>
         </div>
     </div>
-    
-    <a href="https://bubblepopmeme.netlify.app/" target="_blank" class="buy-button">
-        🚀 Buy $BPOP
-    </a>
-    
-    <img src="https://iili.io/FQXFiXa.md.png" alt="Bubble POP Meme Coin" class="middle-right-image">
-    
-    <div class="footer">
-        <p style="color: rgba(255, 255, 255, 0.7); margin: 0; font-weight: 600;">© 2025 Bubble POP - Next Gaming</p>
-        <button class="qr-popup-btn" id="qrPopupBtn" title="Scan QR Code">
-            <img src="https://iili.io/FQXFiXa.md.png" alt="QR Code">
-        </button>
-    </div>
 
+    <!-- QR Modal -->
     <div id="qrModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -736,114 +672,159 @@
             }
 
             initializeSounds() {
-                const frequencies = [800, 1000, 1200, 1400, 1600];
-                frequencies.forEach(freq => {
-                    this.popSounds.push(this.createPopSound(freq));
-                });
+                // Create different types of pop sounds
+                for (let i = 0; i < 5; i++) {
+                    this.popSounds.push(this.createBubblePopSound(i));
+                }
             }
 
-            createPopSound(frequency) {
+            createBubblePopSound(type) {
                 return () => {
                     if (!this.soundEnabled) return;
                     
                     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
                     
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-                    oscillator.type = 'sine';
-                    
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.1);
+                    // Create different sound types based on the type parameter
+                    switch(type) {
+                        case 0:
+                            this.createSoftPop(audioContext);
+                            break;
+                        case 1:
+                            this.createLoudPop(audioContext);
+                            break;
+                        case 2:
+                            this.createSqueakyPop(audioContext);
+                            break;
+                        case 3:
+                            this.createDeepPop(audioContext);
+                            break;
+                        case 4:
+                            this.createSparklePop(audioContext);
+                            break;
+                    }
                 };
             }
 
-            // Generate random color for bubbles
+            createSoftPop(audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            }
+
+            createLoudPop(audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(1200, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.05);
+                
+                gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.05);
+            }
+
+            createSqueakyPop(audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(1500, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.08);
+                
+                gainNode.gain.setValueAtTime(0.25, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.08);
+            }
+
+            createDeepPop(audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.15);
+                
+                gainNode.gain.setValueAtTime(0.35, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.15);
+            }
+
+            createSparklePop(audioContext) {
+                const oscillator1 = audioContext.createOscillator();
+                const oscillator2 = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator1.connect(gainNode);
+                oscillator2.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator1.type = 'sine';
+                oscillator1.frequency.setValueAtTime(2000, audioContext.currentTime);
+                oscillator1.frequency.exponentialRampToValueAtTime(1000, audioContext.currentTime + 0.03);
+                
+                oscillator2.type = 'sine';
+                oscillator2.frequency.setValueAtTime(3000, audioContext.currentTime);
+                oscillator2.frequency.exponentialRampToValueAtTime(1500, audioContext.currentTime + 0.03);
+                
+                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.03);
+                
+                oscillator1.start(audioContext.currentTime);
+                oscillator2.start(audioContext.currentTime);
+                oscillator1.stop(audioContext.currentTime + 0.03);
+                oscillator2.stop(audioContext.currentTime + 0.03);
+            }
+
             getRandomBubbleColor() {
                 const colors = [
-                    // Rainbow colors
-                    ['#FF6B6B', '#FF8E53'],
-                    ['#4ECDC4', '#44A08D'],
-                    ['#45B7D1', '#96C93D'],
-                    ['#F093FB', '#F5576C'],
-                    ['#4FACFE', '#00F2FE'],
-                    ['#43E97B', '#38F9D7'],
-                    ['#FA709A', '#FEE140'],
-                    ['#30CFD0', '#330867'],
-                    ['#A8EDEA', '#FED6E3'],
-                    ['#FF9A9E', '#FAD0C4'],
-                    ['#FBC2EB', '#A6C1EE'],
-                    ['#FD6F96', '#FECFEF'],
-                    ['#E0C3FC', '#8EC5FC'],
-                    ['#FCCF31', '#F55555'],
-                    ['#5EE7DF', '#66A6FF'],
-                    ['#FFD89B', '#19547B'],
-                    ['#C471F5', '#FA71CD'],
-                    ['#FF6A88', '#FF99AC'],
-                    ['#F8B500', '#FFE066'],
-                    ['#00C9FF', '#92FE9D'],
-                    ['#FC466B', '#3F5EFB'],
-                    ['#FF512F', '#DD2476'],
-                    ['#12C2E9', '#C471ED'],
-                    ['#FDBB2D', '#22C1C3'],
-                    ['#FF0080', '#7928CA'],
-                    ['#FF416C', '#FF4B2B'],
-                    ['#8E2DE2', '#4A00E0'],
-                    ['#FF8008', '#FFC837'],
-                    ['#00B4DB', '#0083B0'],
-                    ['#F77062', '#FE5196'],
-                    ['#56CCF2', '#2F80ED'],
-                    ['#F2994A', '#F2C94C'],
-                    ['#11998E', '#38EF7D'],
-                    ['#FC4A1A', '#F7B733'],
-                    ['#EB3349', '#F45C43'],
-                    ['#5614B0', '#DBD65C'],
-                    ['#009FFF', '#EC2F4B'],
-                    ['#FF7E5F', '#FEB47B'],
-                    ['#654EA3', '#EAFCF9'],
-                    ['#667EEA', '#764BA2'],
-                    ['#F093FB', '#F5576C'],
-                    ['#4FACFE', '#00F2FE'],
-                    ['#43E97B', '#38F9D7'],
-                    ['#FA709A', '#FEE140'],
-                    ['#30CFD0', '#330867'],
-                    ['#A8EDEA', '#FED6E3'],
-                    ['#FF9A9E', '#FAD0C4'],
-                    ['#FBC2EB', '#A6C1EE'],
-                    ['#FD6F96', '#FECFEF'],
-                    ['#E0C3FC', '#8EC5FC'],
-                    ['#FCCF31', '#F55555'],
-                    ['#5EE7DF', '#66A6FF'],
-                    ['#FFD89B', '#19547B'],
-                    ['#C471F5', '#FA71CD'],
-                    ['#FF6A88', '#FF99AC'],
-                    ['#F8B500', '#FFE066'],
-                    ['#00C9FF', '#92FE9D'],
-                    ['#FC466B', '#3F5EFB'],
-                    ['#FF512F', '#DD2476'],
-                    ['#12C2E9', '#C471ED'],
-                    ['#FDBB2D', '#22C1C3'],
-                    ['#FF0080', '#7928CA'],
-                    ['#FF416C', '#FF4B2B'],
-                    ['#8E2DE2', '#4A00E0'],
-                    ['#FF8008', '#FFC837'],
-                    ['#00B4DB', '#0083B0'],
-                    ['#F77062', '#FE5196'],
-                    ['#56CCF2', '#2F80ED'],
-                    ['#F2994A', '#F2C94C'],
-                    ['#11998E', '#38EF7D'],
-                    ['#FC4A1A', '#F7B733'],
-                    ['#EB3349', '#F45C43'],
-                    ['#5614B0', '#DBD65C'],
-                    ['#009FFF', '#EC2F4B'],
-                    ['#FF7E5F', '#FEB47B'],
-                    ['#654EA3', '#EAFCF9']
+                    ['#87CEEB', '#4682B4'],
+                    ['#00BFFF', '#1E90FF'],
+                    ['#6495ED', '#4169E1'],
+                    ['#00CED1', '#5F9EA0'],
+                    ['#48D1CC', '#40E0D0'],
+                    ['#00FA9A', '#3CB371'],
+                    ['#FF69B4', '#FF1493'],
+                    ['#FFB6C1', '#FFC0CB'],
+                    ['#FFA07A', '#FF7F50'],
+                    ['#FFD700', '#FFA500'],
+                    ['#ADFF2F', '#9ACD32'],
+                    ['#7CFC00', '#32CD32'],
+                    ['#00FF7F', '#00FA9A'],
+                    ['#40E0D0', '#48D1CC'],
+                    ['#6A5ACD', '#9370DB'],
+                    ['#BA55D3', '#DA70D6'],
+                    ['#FF6347', '#FF4500'],
+                    ['#FF8C00', '#FF7F50'],
+                    ['#DC143C', '#B22222'],
+                    ['#8B4513', '#A0522D']
                 ];
                 
                 return colors[Math.floor(Math.random() * colors.length)];
@@ -860,15 +841,12 @@
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
                 
-                // Apply random color to bubble
                 const [color1, color2] = this.getRandomBubbleColor();
                 bubble.style.background = `radial-gradient(circle at 30% 30%, ${color1}, ${color2})`;
                 
-                // Store colors for floating score
                 bubble.dataset.color1 = color1;
                 bubble.dataset.color2 = color2;
                 
-                // Random size variation
                 const sizeChance = Math.random();
                 if (sizeChance < 0.2) {
                     bubble.classList.add('small');
@@ -898,7 +876,7 @@
                         bubble.parentNode.removeChild(bubble);
                         this.createBubble();
                     }
-                }, 400);
+                }, 300);
             }
 
             updateScore() {
@@ -949,17 +927,14 @@
                 scoreElement.className = 'floating-score';
                 scoreElement.textContent = '$BPOP';
                 
-                // Get colors from the popped bubble
                 const color1 = bubble.dataset.color1;
                 const color2 = bubble.dataset.color2;
                 
-                // Apply the same gradient colors as the bubble
                 scoreElement.style.background = `linear-gradient(45deg, ${color1}, ${color2})`;
                 scoreElement.style.webkitBackgroundClip = 'text';
                 scoreElement.style.webkitTextFillColor = 'transparent';
                 scoreElement.style.backgroundClip = 'text';
                 
-                // Add a subtle glow effect
                 scoreElement.style.filter = `drop-shadow(0 0 8px ${color1})`;
                 
                 const rect = bubble.getBoundingClientRect();
@@ -972,7 +947,7 @@
                     if (scoreElement.parentNode) {
                         scoreElement.parentNode.removeChild(scoreElement);
                     }
-                }, 1200);
+                }, 1000);
             }
 
             updateDisplay() {
